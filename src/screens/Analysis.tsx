@@ -11,8 +11,6 @@ import {useNavigate} from '../hooks';
 import CircularProgress from '../components/CircularProgress';
 
 const Analysis = () => {
-  const {navigate} = useNavigate();
-
   return (
     <Screen>
       <FlatList
@@ -167,7 +165,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const Analytic = ({item}) => {
+const Analytic = ({
+  item,
+}: {
+  item: {
+    title: string;
+    identifier: string;
+    password: string;
+    link: string;
+  };
+}) => {
   const {navigate} = useNavigate();
   const percentage = Math.floor(Math.random() * 100);
 
