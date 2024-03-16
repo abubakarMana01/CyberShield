@@ -13,9 +13,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showToast} from '../utils';
+import {useNavigate} from '../hooks';
+import {ROUTES} from '../navs/routes';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
+
+  const {navigate} = useNavigate();
 
   const copyToClipboard = (text: string) => {
     Clipboard.setString(text);
@@ -40,6 +44,7 @@ const Search = () => {
           onChangeText={setSearchQuery}
           style={{flex: 1}}
           placeholder="Search here..."
+          placeholderTextColor={COLORS.grey}
         />
         <Ionicons name="search" size={21} color={COLORS.grey} />
       </View>
@@ -49,12 +54,15 @@ const Search = () => {
             data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             data.identifier.toLowerCase().includes(searchQuery.toLowerCase()),
         )}
+        ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
         keyExtractor={(item, index) => item.title + item.identifier + index}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
-          <View style={styles.row}>
+          <TouchableOpacity
+            onPress={() => navigate(ROUTES.RECORD_DETAILS, {record: item})}
+            style={styles.row}>
             <View style={styles.rowImg}>
-              <AntDesign name="android1" size={30} color={COLORS.greyDark} />
+              <AntDesign name="android1" size={24} color={COLORS.greyDark} />
             </View>
             <View>
               <Text style={styles.passwordTitle}>{item.title}</Text>
@@ -65,9 +73,8 @@ const Search = () => {
               style={styles.copyIconContainer}>
               <Ionicons name="copy-outline" size={24} />
             </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         )}
-        ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
       />
     </Screen>
   );
@@ -115,35 +122,36 @@ const DATA = [
     title: 'Apple',
     identifier: 'faizaolagunju@gmail.com',
     password: 'test1234',
+    link: 'apple.com',
   },
   {
     title: 'Adobe',
     identifier: 'faizaolagunju@gmail.com',
     password: 'test1234',
+    link: 'adobe.com',
   },
   {
     title: 'Netflix',
     identifier: 'faizaolagunju@gmail.com',
     password: 'test1234',
+    link: 'netflix.com',
   },
   {
     title: 'Snapchat',
     identifier: 'snapfaiza@gmail.com',
     password: 'test1234',
+    link: 'snapchat.com',
   },
   {
     title: 'Spotify',
     identifier: 'faizaspotify@gmail.com',
     password: 'test1234',
+    link: 'spotify.com',
   },
   {
     title: 'Slack',
     identifier: 'faizaolagunju@gmail.com',
     password: 'test1234',
-  },
-  {
-    title: 'Adobe',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
+    link: 'slack.com',
   },
 ];

@@ -4,9 +4,8 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
 import {AppButton, TextInput} from '../../components';
-import {ROUTES} from '../../navs/routes';
 import {COLORS} from '../../constants/colors';
-// import {EMAIL_REGEX} from '~utils';
+import {EMAIL_REGEX} from '../../utils';
 // import useAuthApi from '~hooks/useAuthApi';
 
 const Login = () => {

@@ -7,17 +7,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showToast} from '../utils';
+import {useNavigate} from '../hooks';
+import {ROUTES} from '../navs/routes';
 
 const Home = () => {
+  const {navigate} = useNavigate();
+
   const copyToClipboard = (text: string) => {
     Clipboard.setString(text);
     showToast('Copied!');
   };
-
-  // const fetchCopiedText = async () => {
-  //   const text = await Clipboard.getString();
-  //   console.log(text);
-  // };
 
   return (
     <Screen>
@@ -27,9 +26,11 @@ const Home = () => {
           keyExtractor={item => item.title + item.identifier}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
-            <View style={styles.row}>
+            <TouchableOpacity
+              onPress={() => navigate(ROUTES.RECORD_DETAILS, {record: item})}
+              style={styles.row}>
               <View style={styles.rowImg}>
-                <AntDesign name="android1" size={30} color={COLORS.greyDark} />
+                <AntDesign name="android1" size={24} color={COLORS.greyDark} />
               </View>
               <View>
                 <Text style={styles.passwordTitle}>{item.title}</Text>
@@ -40,7 +41,7 @@ const Home = () => {
                 style={styles.copyIconContainer}>
                 <Ionicons name="copy-outline" size={24} />
               </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           )}
           renderSectionHeader={({section: {title}}) => (
             <Text style={styles.sectionHeader}>{title}</Text>
@@ -107,11 +108,13 @@ const DATA = [
         title: 'Apple',
         identifier: 'faizaolagunju@gmail.com',
         password: 'test1234',
+        link: 'slack.com',
       },
       {
         title: 'Adobe',
         identifier: 'faizaolagunju@gmail.com',
         password: 'test1234',
+        link: 'slack.com',
       },
     ],
   },
@@ -122,16 +125,19 @@ const DATA = [
         title: 'Netflix',
         identifier: 'faizaolagunju@gmail.com',
         password: 'test1234',
+        link: 'slack.com',
       },
       {
         title: 'Snapchat',
         identifier: 'snapfaiza@gmail.com',
         password: 'test1234',
+        link: 'slack.com',
       },
       {
         title: 'Spotify',
         identifier: 'faizaspotify@gmail.com',
         password: 'test1234',
+        link: 'slack.com',
       },
     ],
   },
@@ -142,11 +148,13 @@ const DATA = [
         title: 'Slack',
         identifier: 'faizaolagunju@gmail.com',
         password: 'test1234',
+        link: 'slack.com',
       },
       {
         title: 'Adobe',
         identifier: 'faizaolagunju@gmail.com',
         password: 'test1234',
+        link: 'slack.com',
       },
     ],
   },

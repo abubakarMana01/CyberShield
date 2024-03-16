@@ -52,6 +52,7 @@ const BottomTabNavigator = () => {
         name={ROUTES.ANALYSIS}
         component={Analysis}
         options={{
+          headerTitle: 'Security',
           tabBarIcon: ({focused, color, size}) => (
             <MaterialCommunityIcons
               name={focused ? 'chart-box' : 'chart-box-outline'}
@@ -65,6 +66,7 @@ const BottomTabNavigator = () => {
         name={ROUTES.SEARCH}
         component={Search}
         options={{
+          headerShown: false,
           tabBarIcon: ({focused, color, size}) => (
             <Ionicons
               name={focused ? 'search' : 'search-outline'}

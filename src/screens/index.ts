@@ -6,3 +6,5 @@ export {default as Settings} from './Settings';
 export {default as Profile} from './Profile';
 export {default as Analysis} from './Analysis';
 export {default as AddNewRecord} from './AddNewRecord';
+export {default as RecordDetails} from './RecordDetails';
+export {default as UpdateRecord} from './UpdateRecord';

@@ -11,4 +11,6 @@ export const ROUTES = Object.freeze({
 
   PROFILE: 'Profile',
   ADD_NEW_RECORD: 'Add New Record',
+  RECORD_DETAILS: 'Record Details',
+  UPDATE_RECORD: 'Update Record',
 });
