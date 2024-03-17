@@ -2,32 +2,32 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 
 import {useForm} from 'react-hook-form';
-import {useNavigation} from '@react-navigation/native';
-import {AppButton, TextInput} from '../../components';
+import {AppButton, AuthHeaderLogo, Screen, TextInput} from '../../components';
 import {COLORS} from '../../constants/colors';
 import {EMAIL_REGEX} from '../../utils';
+import ChangeAuthView from '../../components/ChangeAuthView';
+import {useNavigate} from '../../hooks';
+import {ROUTES} from '../../navs/routes';
 // import useAuthApi from '~hooks/useAuthApi';
 
 const Login = () => {
-  const {navigate} = useNavigation();
+  const {navigate} = useNavigate();
   const {control, handleSubmit} = useForm();
   // const {authHandler, isLoading} = useAuthApi();
 
   const onSubmit = (data: any) => {
     console.log(data);
+    navigate(ROUTES.SECURITY_QUESTION);
     // authHandler('login', data);
   };
 
   return (
-    <View style={{flex: 1}}>
+    <Screen>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
         contentContainerStyle={styles.container}>
-        {/* <Image
-          source={require('~assets/images/auth/authenticate.png')}
-          style={styles.image}
-        /> */}
+        <AuthHeaderLogo />
 
         <TextInput
           name="email"
@@ -40,7 +40,7 @@ const Login = () => {
             required: 'Email is required',
             pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
           }}
-          // autoFocus
+          autoFocus
         />
         <View>
           <TextInput
@@ -63,7 +63,7 @@ const Login = () => {
           </TouchableOpacity> */}
         </View>
         <AppButton
-          text="Login"
+          text="Proceed"
           // isLoading={isLoading}
           handleClick={handleSubmit(onSubmit)}
           textStyles={styles.buttonText}
@@ -71,8 +71,8 @@ const Login = () => {
         />
       </ScrollView>
 
-      {/* <ChangeAuthView variant="Create Account" /> */}
-    </View>
+      <ChangeAuthView variant="register" />
+    </Screen>
   );
 };
 

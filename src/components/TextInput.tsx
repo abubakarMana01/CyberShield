@@ -130,12 +130,11 @@ const PasswordSecure: React.FC<{
   showPassword: boolean;
 }> = ({toggleMode, showPassword}) => (
   <TouchableOpacity style={styles.secureTextEntryIcon} onPress={toggleMode}>
-    {showPassword && (
-      <Ionicons
-        name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-        color={COLORS.grey2}
-      />
-    )}
+    <Ionicons
+      name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+      color={COLORS.grey2}
+      size={24}
+    />
   </TouchableOpacity>
 );
 

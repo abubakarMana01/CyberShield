@@ -2,7 +2,13 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ROUTES} from './routes';
 import BottomTabNavigator from './BottomTabNavigator';
-import {AddNewRecord, Profile, RecordDetails, UpdateRecord} from '../screens';
+import {
+  AddNewRecord,
+  EditProfile,
+  Profile,
+  RecordDetails,
+  UpdateRecord,
+} from '../screens';
 
 const AppNavigator = () => {
   const StackNav = createNativeStackNavigator();
@@ -16,6 +22,7 @@ const AppNavigator = () => {
       <StackNav.Screen component={AddNewRecord} name={ROUTES.ADD_NEW_RECORD} />
       <StackNav.Screen component={RecordDetails} name={ROUTES.RECORD_DETAILS} />
       <StackNav.Screen component={UpdateRecord} name={ROUTES.UPDATE_RECORD} />
+      <StackNav.Screen component={EditProfile} name={ROUTES.EDIT_PROFILE} />
     </StackNav.Navigator>
   );
 };

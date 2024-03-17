@@ -24,17 +24,17 @@ const Analysis = () => {
                       styles.securityPercentage,
                       {top: -3, fontWeight: '500'},
                     ]}>
-                    82%
+                    64%
                   </Text>
                 </View>
-                <CircularProgress percent={40} />
+                <CircularProgress percent={64} />
               </View>
             </View>
-            <Text style={styles.securityPercentage}>82% secured</Text>
+            <Text style={styles.securityPercentage}>64% secured</Text>
 
             <View style={styles.statsRow}>
               <View style={styles.stat}>
-                <Text style={styles.statNumber}>82</Text>
+                <Text style={styles.statNumber}>40</Text>
                 <Text style={styles.statTitle}>Safe</Text>
               </View>
               <View style={styles.stat}>

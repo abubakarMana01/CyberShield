@@ -44,7 +44,7 @@ const AppButton: React.FC<Props> = ({
               : variant === 'secondary'
               ? 'transparent'
               : COLORS.primary,
-          borderColor: variant === 'secondary' ? COLORS.primary : 'auto',
+          borderColor: variant === 'secondary' ? COLORS.grey2 : 'auto',
           borderWidth: variant === 'secondary' ? 1 : 0,
         },
         containerStyles,

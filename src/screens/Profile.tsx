@@ -35,7 +35,13 @@ const Profile = () => {
         <View>
           <Text style={styles.username}>Faiza Olagunju</Text>
           <Text style={styles.phoneNumber}>902633XXXX</Text>
-          <TouchableOpacity style={styles.editProfileBtn}>
+          <TouchableOpacity
+            style={styles.editProfileBtn}
+            onPress={() =>
+              navigate(ROUTES.EDIT_PROFILE, {
+                user: {fullName: 'Faiza Olagunju', phoneNumber: '9084923951'},
+              })
+            }>
             <Text style={styles.editProfileText}>Edit profile</Text>
           </TouchableOpacity>
         </View>

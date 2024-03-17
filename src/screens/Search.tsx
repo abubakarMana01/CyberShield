@@ -45,6 +45,7 @@ const Search = () => {
           style={{flex: 1}}
           placeholder="Search here..."
           placeholderTextColor={COLORS.grey}
+          autoFocus
         />
         <Ionicons name="search" size={21} color={COLORS.grey} />
       </View>

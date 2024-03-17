@@ -22,7 +22,7 @@ const AppContext = createContext<IContext>({} as IContext);
 
 const AppProvider = ({children}: {children: ReactNode}) => {
   const [accessToken, setAccessToken] = useState('');
-  const [user, setUser] = useState<null | {}>({});
+  const [user, setUser] = useState<null | {}>(null);
 
   const login = () => {};
 
