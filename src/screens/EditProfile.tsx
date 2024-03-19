@@ -31,7 +31,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     setValue('fullName', params?.user?.fullName || '');
-    setValue('phone', params?.user?.phoneNumber || '');
+    setValue('phoneNumber', params?.user?.phoneNumber.split('+234')[1] || '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -58,7 +58,7 @@ const EditProfile = () => {
             rules={{required: 'Full name is required'}}
           />
           <PhoneInput
-            name="phone"
+            name="phoneNumber"
             control={control}
             label="Phone Number"
             inputMode="tel"

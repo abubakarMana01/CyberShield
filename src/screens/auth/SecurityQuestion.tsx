@@ -18,7 +18,6 @@ const SecurityQuestion = () => {
   }
 
   const onSubmit = (data: any) => {
-    console.log(data);
     authHandler('validate-security-question', {
       answer: data.answer.trim(),
       phoneNumber: params.phoneNumber,

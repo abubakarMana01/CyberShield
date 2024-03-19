@@ -39,7 +39,10 @@ const Profile = () => {
             style={styles.editProfileBtn}
             onPress={() =>
               navigate(ROUTES.EDIT_PROFILE, {
-                user: {fullName: 'Faiza Olagunju', phoneNumber: '9084923951'},
+                user: {
+                  fullName: user?.fullName,
+                  phoneNumber: '+' + user?.phoneNumber,
+                },
               })
             }>
             <Text style={styles.editProfileText}>Edit profile</Text>

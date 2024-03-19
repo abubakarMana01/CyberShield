@@ -13,11 +13,12 @@ import PhoneInput from '../../components/PhoneInput';
 import {Country, countryData} from '../../utils/country';
 import {COLORS} from '../../constants/colors';
 import ChangeAuthView from '../../components/ChangeAuthView';
+import useAuthApi from '../../hooks/useAuthApi';
 
 const Register = () => {
   const countryCode = 'NG';
   const {control, handleSubmit} = useForm();
-  // const {authHandler, isLoading} = useAuthApi();
+  const {authHandler, isLoading} = useAuthApi();
   const [selectedCountry, setSelectedCountry] = useState<Country>(
     countryData[0],
   );
@@ -25,7 +26,7 @@ const Register = () => {
   const onSubmit = (data: any) => {
     const formData = {...data, phone: selectedCountry.dialCode + data.phone};
     console.log(formData);
-    // authHandler('signup', formData);
+    authHandler('register', formData);
   };
 
   return (
@@ -46,7 +47,7 @@ const Register = () => {
           autoFocus
         />
         <PhoneInput
-          name="phone"
+          name="phoneNumber"
           control={control}
           label="Phone Number"
           inputMode="tel"
@@ -80,6 +81,16 @@ const Register = () => {
             },
           }}
         />
+        <TextInput
+          name="securityAnswer"
+          control={control}
+          label="Answer to security question"
+          placeholder="********"
+          secureTextEntry
+          rules={{
+            required: 'Answer to security question is required',
+          }}
+        />
 
         <View style={styles.agreementTextContainer}>
           <Text style={styles.agreementText}>
@@ -99,7 +110,7 @@ const Register = () => {
         <AppButton
           text="Continue"
           handleClick={handleSubmit(onSubmit)}
-          isLoading={false}
+          isLoading={isLoading}
         />
       </ScrollView>
       <ChangeAuthView variant="login" />

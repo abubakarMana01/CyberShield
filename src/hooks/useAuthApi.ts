@@ -11,16 +11,13 @@ type AuthPath = 'register' | 'login' | 'validate-security-question';
 const useAuthApi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {navigate} = useNavigate();
-  const {setUser} = useAuthContext();
+  const {setUser, setIsAuthenticated} = useAuthContext();
 
   const authHandler = async (path: AuthPath, formData: any) => {
     setIsLoading(true);
     try {
-      const {data} = await axiosInstance.post<{data: object; message: string}>(
-        '/auth/' + path,
-        formData,
-      );
-      // console.log('path', data);
+      const {data} = await axiosInstance.post('/auth/' + path, formData);
+      console.log('path', data);
 
       if (path === 'login') {
         showToast('Success');
@@ -31,7 +28,11 @@ const useAuthApi = () => {
         showToast('Account created successfully');
       } else if (path === 'validate-security-question') {
         showToast('Correct');
-        navigate(ROUTES.BIOMETRICS);
+
+        // TODO? Remove when testing on real device
+        setIsAuthenticated(true);
+
+        // navigate(ROUTES.BIOMETRICS);
       }
     } catch (ex: any) {
       const errorMsg =
@@ -39,6 +40,7 @@ const useAuthApi = () => {
           ? ex?.message
           : ex?.response?.data?.error || 'Oops, something went wrong';
       showToast(errorMsg, 'error');
+      console.log(ex.response.data);
     } finally {
       setIsLoading(false);
     }
