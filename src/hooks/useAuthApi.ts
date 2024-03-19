@@ -24,8 +24,8 @@ const useAuthApi = () => {
         setUser(data.data);
         navigate(ROUTES.SECURITY_QUESTION, data.data);
       } else if (path === 'register') {
-        setUser(data.data);
-        showToast('Account created successfully');
+        navigate(ROUTES.LOGIN);
+        showToast('Account created successfully. Please login');
       } else if (path === 'validate-security-question') {
         showToast('Correct');
 
