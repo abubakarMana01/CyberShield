@@ -8,10 +8,10 @@ import {ROUTES} from '../navs/routes';
 import {useNavigate} from '../hooks';
 import {COLORS} from '../constants/colors';
 import {Screen} from '../components';
-import {useAppContext} from '../contexts/AppProvider';
+import {useAuthContext} from '../contexts/AuthProvider';
 
 const Profile = () => {
-  const {logout} = useAppContext();
+  const {logout, user} = useAuthContext();
   const {navigate, goBack} = useNavigate();
 
   return (
@@ -33,8 +33,8 @@ const Profile = () => {
           <Fontisto name="person" size={48} color={COLORS.white} />
         </View>
         <View>
-          <Text style={styles.username}>Faiza Olagunju</Text>
-          <Text style={styles.phoneNumber}>902633XXXX</Text>
+          <Text style={styles.username}>{user?.fullName}</Text>
+          <Text style={styles.phoneNumber}>+{user?.phoneNumber}</Text>
           <TouchableOpacity
             style={styles.editProfileBtn}
             onPress={() =>

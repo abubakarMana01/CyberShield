@@ -1,24 +1,29 @@
 import {ScrollView, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
 import {useForm} from 'react-hook-form';
 import {AppButton, AuthHeaderLogo, Screen, TextInput} from '../../components';
 import {COLORS} from '../../constants/colors';
-import {EMAIL_REGEX} from '../../utils';
 import ChangeAuthView from '../../components/ChangeAuthView';
-import {useNavigate} from '../../hooks';
-import {ROUTES} from '../../navs/routes';
-// import useAuthApi from '~hooks/useAuthApi';
+import useAuthApi from '../../hooks/useAuthApi';
+import PhoneInput from '../../components/PhoneInput';
+import {Country, countryData} from '../../utils/country';
 
 const Login = () => {
-  const {navigate} = useNavigate();
-  const {control, handleSubmit} = useForm();
-  // const {authHandler, isLoading} = useAuthApi();
+  const countryCode = 'NG';
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    navigate(ROUTES.SECURITY_QUESTION);
-    // authHandler('login', data);
+  const {control, handleSubmit} = useForm();
+  const {authHandler, isLoading} = useAuthApi();
+  const [selectedCountry, setSelectedCountry] = useState<Country>(
+    countryData[0],
+  );
+
+  const onSubmit = async (data: any) => {
+    const payload = {
+      ...data,
+      phoneNumber: selectedCountry.dialCode.split('+')[1] + data.phoneNumber,
+    };
+    authHandler('login', payload);
   };
 
   return (
@@ -29,18 +34,27 @@ const Login = () => {
         contentContainerStyle={styles.container}>
         <AuthHeaderLogo />
 
-        <TextInput
-          name="email"
+        <PhoneInput
+          name="phoneNumber"
           control={control}
-          label="Email Address"
-          inputMode="email"
-          placeholder="johndoe@example.com"
-          autoCapitalize="none"
-          rules={{
-            required: 'Email is required',
-            pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
-          }}
+          label="Phone Number"
+          inputMode="tel"
+          countryCode={countryCode}
+          placeholder=" 8011111111"
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
           autoFocus
+          rules={{
+            required: 'Phone number is required',
+            minLength: {
+              value: 8,
+              message: 'Phone number should be at least 8 characters',
+            },
+            maxLength: {
+              value: 11,
+              message: 'Phone number should not be more than 11 characters',
+            },
+          }}
         />
         <View>
           <TextInput
@@ -57,14 +71,10 @@ const Login = () => {
               },
             }}
           />
-
-          {/* <TouchableOpacity onPress={() => navigate(ROUTES.FORGOT_PASSWORD)}>
-            <Text style={styles.forgotPassword}>Forgot your Password?</Text>
-          </TouchableOpacity> */}
         </View>
         <AppButton
           text="Proceed"
-          // isLoading={isLoading}
+          isLoading={isLoading}
           handleClick={handleSubmit(onSubmit)}
           textStyles={styles.buttonText}
           containerStyles={styles.ctaButton}

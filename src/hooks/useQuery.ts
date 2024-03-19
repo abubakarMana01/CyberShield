@@ -1,6 +1,6 @@
 import {useQuery as useReactQuery} from '@tanstack/react-query';
 import {axiosInstance} from '../libs/axiosInstance';
-import {useAppContext} from '../contexts/AppProvider';
+import {useAuthContext} from '../contexts/AuthProvider';
 import {showToast} from '../utils';
 
 type QueryPath =
@@ -15,7 +15,7 @@ const generateQueryKey = (path: QueryPath) => path.split('/');
 
 export default function useQuery(path: QueryPath) {
   const queryKey = generateQueryKey(path);
-  const {accessToken, logout} = useAppContext();
+  const {accessToken, logout} = useAuthContext();
 
   axiosInstance.interceptors.request.use(
     config => {

@@ -4,18 +4,25 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import {AppButton, Screen, Text, TextInput} from '../../components';
 import {useNavigate} from '../../hooks';
-import {ROUTES} from '../../navs/routes';
-// import useAuthApi from '~hooks/useAuthApi';
+import {useRoute} from '../../hooks/useNavigate';
+import useAuthApi from '../../hooks/useAuthApi';
 
 const SecurityQuestion = () => {
-  const {navigate} = useNavigate();
+  const {params} = useRoute();
+  const {goBack} = useNavigate();
   const {control, handleSubmit} = useForm();
-  // const {authHandler, isLoading} = useAuthApi();
+  const {authHandler, isLoading} = useAuthApi();
+
+  if (!params?.securityQuestion || !params.phoneNumber) {
+    goBack();
+  }
 
   const onSubmit = (data: any) => {
     console.log(data);
-    navigate(ROUTES.BIOMETRICS);
-    // authHandler('login', data);
+    authHandler('validate-security-question', {
+      answer: data.answer.trim(),
+      phoneNumber: params.phoneNumber,
+    });
   };
 
   return (
@@ -34,15 +41,8 @@ const SecurityQuestion = () => {
         </View>
 
         <View style={{marginTop: 20}}>
-          {/* <Text>Security Question</Text> */}
-          <Text
-            style={{
-              fontSize: 18,
-              marginTop: 4,
-              fontWeight: '500',
-              textAlign: 'center',
-            }}>
-            What is the name of your favorite sports team?
+          <Text style={styles.securityQuestion}>
+            {params?.securityQuestion}
           </Text>
         </View>
         <TextInput
@@ -58,7 +58,7 @@ const SecurityQuestion = () => {
         />
         <AppButton
           text="Proceed"
-          // isLoading={isLoading}
+          isLoading={isLoading}
           handleClick={handleSubmit(onSubmit)}
           textStyles={styles.buttonText}
           containerStyles={styles.ctaButton}
@@ -73,6 +73,12 @@ export default SecurityQuestion;
 const styles = StyleSheet.create({
   container: {
     gap: 24,
+  },
+  securityQuestion: {
+    fontSize: 18,
+    marginTop: 4,
+    fontWeight: '500',
+    textAlign: 'center',
   },
   image: {
     width: 200,

@@ -4,39 +4,25 @@ import React, {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from 'react';
+import LoaderView from '../components/LoaderView';
+import {useAuthContext} from './AuthProvider';
+import {axiosInstance} from '../libs/axiosInstance';
 
-type User = {} | null;
-
-type IContext = {
-  accessToken: string;
-  setAccessToken: Dispatch<SetStateAction<string>>;
-  user: User;
-  setUser: Dispatch<SetStateAction<User>>;
-  logout: () => void;
-  login: (token: string) => void;
-};
+type IContext = {};
 
 const AppContext = createContext<IContext>({} as IContext);
 
 const AppProvider = ({children}: {children: ReactNode}) => {
-  const [accessToken, setAccessToken] = useState('');
-  const [user, setUser] = useState<null | {}>(null);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  const login = () => {};
+  // if (isLoading) {
+  //   return <LoaderView />;
+  // }
 
-  const logout = () => {
-    setUser(null);
-    setAccessToken('');
-  };
-
-  return (
-    <AppContext.Provider
-      value={{accessToken, setAccessToken, user, setUser, logout, login}}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
 };
 
 export default AppProvider;

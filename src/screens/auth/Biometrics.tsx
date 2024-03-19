@@ -1,19 +1,22 @@
 import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import TouchID from 'react-native-touch-id';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {AppButton, AuthHeaderLogo, Screen, Text} from '../../components';
 import {COLORS} from '../../constants/colors';
-import {useAppContext} from '../../contexts/AppProvider';
+import {useAuthContext} from '../../contexts/AuthProvider';
+import {showToast} from '../../utils';
 
 const Biometrics = () => {
-  const {setUser} = useAppContext();
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const {setIsAuthenticated, user} = useAuthContext();
 
   const authenticate = () => {
     TouchID.authenticate('to demo this react-native component')
       .then((success: any) => {
         console.log('Success', success);
+        setIsSuccessful(true);
       })
       .catch((error: any) => {
         Alert.alert(
@@ -21,6 +24,7 @@ const Biometrics = () => {
           'Ensure device has biometrics authentication set up.',
         );
         console.log(error);
+        setIsSuccessful(false);
       });
   };
 
@@ -41,8 +45,14 @@ const Biometrics = () => {
 
       <AppButton
         text="Proceed"
-        // isLoading={isLoading}
-        handleClick={() => setUser({})}
+        disabled={!isSuccessful}
+        handleClick={() => {
+          if (user) {
+            setIsAuthenticated(true);
+          } else {
+            showToast('Failed to authenticate', 'error');
+          }
+        }}
         containerStyles={styles.ctaButton}
       />
     </Screen>
