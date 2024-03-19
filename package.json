@@ -11,7 +11,7 @@
     "clean:watchman": "watchman watch-del-all",
     "clean:start": "react-native start --reset-cache",
     "clean:ios": "cd ios && rm -rf Pods && rm -rf Podfile.lock && rm -rf *.xcworkspace && cd ..",
-    "clean:android": "cd android && rm -rf .gradle && ./gradlew clean --warning-mode all && cd ..",
+    "clean:android": "cd android && rm -rf .gradle && ./gradlew clean --warning-mode all && cd .."
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.3.1",
