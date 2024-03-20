@@ -17,7 +17,6 @@ const useAuthApi = () => {
     setIsLoading(true);
     try {
       const {data} = await axiosInstance.post('/auth/' + path, formData);
-      console.log('path', data);
 
       if (path === 'login') {
         showToast('Success');

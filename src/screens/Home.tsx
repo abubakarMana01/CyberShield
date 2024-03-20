@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unstable-nested-components */
 import {SectionList, StyleSheet, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Screen, Text} from '../components';
 import {COLORS} from '../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -9,48 +8,74 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {showToast} from '../utils';
 import {useNavigate} from '../hooks';
 import {ROUTES} from '../navs/routes';
+import useRecords from '../hooks/useRecords';
+import LoaderView from '../components/LoaderView';
+import {useNavigation} from '@react-navigation/native';
 
 const Home = () => {
   const {navigate} = useNavigate();
+  const navigation = useNavigation();
+  const {isLoading, records, refetch} = useRecords();
 
   const copyToClipboard = (text: string) => {
     Clipboard.setString(text);
     showToast('Copied!');
   };
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      refetch();
+    });
+
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
+
+  if (isLoading) {
+    return <LoaderView />;
+  }
+
   return (
     <Screen>
       <View style={styles.container}>
-        <SectionList
-          sections={DATA}
-          keyExtractor={item => item.title + item.identifier}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => navigate(ROUTES.RECORD_DETAILS, {record: item})}
-              style={styles.row}>
-              <View style={styles.rowImg}>
-                <AntDesign name="android1" size={24} color={COLORS.greyDark} />
-              </View>
-              <View>
-                <Text style={styles.passwordTitle}>{item.title}</Text>
-                <Text style={styles.passwordIdentifier}>{item.identifier}</Text>
-              </View>
+        {records && (
+          <SectionList
+            sections={[{title: 'Priority', data: records}]}
+            keyExtractor={item => item.name + item.userIdentifier}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item}) => (
               <TouchableOpacity
-                onPress={() => copyToClipboard(item.password)}
-                style={styles.copyIconContainer}>
-                <Ionicons name="copy-outline" size={24} />
+                onPress={() => navigate(ROUTES.RECORD_DETAILS, {record: item})}
+                style={styles.row}>
+                <View style={styles.rowImg}>
+                  <AntDesign
+                    name="android1"
+                    size={24}
+                    color={COLORS.greyDark}
+                  />
+                </View>
+                <View>
+                  <Text style={styles.passwordTitle}>{item.name}</Text>
+                  <Text style={styles.passwordIdentifier}>
+                    {item.userIdentifier}
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => copyToClipboard(item.password)}
+                  style={styles.copyIconContainer}>
+                  <Ionicons name="copy-outline" size={24} />
+                </TouchableOpacity>
               </TouchableOpacity>
-            </TouchableOpacity>
-          )}
-          renderSectionHeader={({section: {title}}) => (
-            <Text style={styles.sectionHeader}>{title}</Text>
-          )}
-          ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
-          SectionSeparatorComponent={() => (
-            <View style={styles.sectionSeparator} />
-          )}
-        />
+            )}
+            renderSectionHeader={({section: {title}}) => (
+              <Text style={styles.sectionHeader}>{title}</Text>
+            )}
+            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
+            SectionSeparatorComponent={() => (
+              <View style={styles.sectionSeparator} />
+            )}
+          />
+        )}
       </View>
     </Screen>
   );
@@ -99,63 +124,3 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
 });
-
-const DATA = [
-  {
-    title: 'Priority',
-    data: [
-      {
-        title: 'Apple',
-        identifier: 'faizaolagunju@gmail.com',
-        password: 'test1234',
-        link: 'slack.com',
-      },
-      {
-        title: 'Adobe',
-        identifier: 'faizaolagunju@gmail.com',
-        password: 'test1234',
-        link: 'slack.com',
-      },
-    ],
-  },
-  {
-    title: 'Entertainment',
-    data: [
-      {
-        title: 'Netflix',
-        identifier: 'faizaolagunju@gmail.com',
-        password: 'test1234',
-        link: 'slack.com',
-      },
-      {
-        title: 'Snapchat',
-        identifier: 'snapfaiza@gmail.com',
-        password: 'test1234',
-        link: 'slack.com',
-      },
-      {
-        title: 'Spotify',
-        identifier: 'faizaspotify@gmail.com',
-        password: 'test1234',
-        link: 'slack.com',
-      },
-    ],
-  },
-  {
-    title: 'Work',
-    data: [
-      {
-        title: 'Slack',
-        identifier: 'faizaolagunju@gmail.com',
-        password: 'test1234',
-        link: 'slack.com',
-      },
-      {
-        title: 'Adobe',
-        identifier: 'faizaolagunju@gmail.com',
-        password: 'test1234',
-        link: 'slack.com',
-      },
-    ],
-  },
-];

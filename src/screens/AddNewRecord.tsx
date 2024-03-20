@@ -11,19 +11,43 @@ import {useNavigate} from '../hooks';
 import {AppButton, PasswordGenerator, Screen, TextInput} from '../components';
 import {COLORS} from '../constants/colors';
 import {useForm} from 'react-hook-form';
+import {showToast} from '../utils';
+import {axiosInstance} from '../libs/axiosInstance';
+import {useAuthContext} from '../contexts/AuthProvider';
 
 const AddNewRecord = () => {
   // Count used to trigger regeneration of password
   const [regenerateCount, setRegenerateCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState('');
   const {goBack} = useNavigate();
-
   const {control, handleSubmit} = useForm();
-  // const {authHandler, isLoading} = useAuthApi();
+  const {user} = useAuthContext();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    // authHandler('login', data);
+  const onSubmit = async (formData: any) => {
+    if (!password.trim()) {
+      return showToast('Password is required', 'error');
+    }
+    const payload = {...formData, password};
+
+    try {
+      setIsLoading(true);
+      const {data} = await axiosInstance.post(
+        `/records/add?userId=${user?.id}`,
+        payload,
+      );
+      console.log(data.data);
+      goBack();
+    } catch (ex: any) {
+      const errorMsg =
+        ex?.message === 'Network Error'
+          ? ex?.message
+          : ex?.response?.data?.error || 'Oops, something went wrong';
+      showToast(errorMsg, 'error');
+      console.log(ex.response.data);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,7 +75,7 @@ const AddNewRecord = () => {
               autoFocus
             />
             <TextInput
-              name="identifier"
+              name="userIdentifier"
               control={control}
               label="User ID"
               inputMode="text"
@@ -88,6 +112,7 @@ const AddNewRecord = () => {
               handleClick={handleSubmit(onSubmit)}
               text="Save password"
               containerStyles={styles.btn}
+              isLoading={isLoading}
             />
           </View>
         </Screen>

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Screen} from '../components';
 import {COLORS} from '../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -15,30 +15,40 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {showToast} from '../utils';
 import {useNavigate} from '../hooks';
 import {ROUTES} from '../navs/routes';
+import {useAppContext} from '../contexts/AppProvider';
+import useRecords from '../hooks/useRecords';
+import LoaderView from '../components/LoaderView';
+import {useNavigation} from '@react-navigation/native';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const {navigate} = useNavigate();
+  const {records} = useAppContext();
+  const {isLoading, refetch} = useRecords();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      refetch();
+    });
+
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
 
   const copyToClipboard = (text: string) => {
     Clipboard.setString(text);
     showToast('Copied!');
   };
 
+  if (isLoading && !records) {
+    return <LoaderView />;
+  }
+
   return (
     <Screen>
-      <View
-        style={{
-          paddingVertical: 12,
-          paddingHorizontal: 16,
-          flexDirection: 'row',
-          alignItems: 'center',
-          borderRadius: 8,
-          backgroundColor: COLORS.greyLight,
-          minHeight: 45,
-          marginBottom: 24,
-        }}>
+      <View style={styles.searchInputContainer}>
         <TextInput
           value={searchQuery}
           onChangeText={setSearchQuery}
@@ -46,17 +56,25 @@ const Search = () => {
           placeholder="Search here..."
           placeholderTextColor={COLORS.grey}
           autoFocus
+          clearButtonMode="while-editing"
         />
         <Ionicons name="search" size={21} color={COLORS.grey} />
       </View>
       <FlatList
-        data={DATA.filter(
+        data={records?.filter(
           data =>
-            data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            data.identifier.toLowerCase().includes(searchQuery.toLowerCase()),
+            data.name
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase().trim()) ||
+            data.link
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase().trim()) ||
+            data.userIdentifier
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase().trim()),
         )}
         ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
-        keyExtractor={(item, index) => item.title + item.identifier + index}
+        keyExtractor={(item, index) => item.name + item.userIdentifier + index}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
           <TouchableOpacity
@@ -66,8 +84,10 @@ const Search = () => {
               <AntDesign name="android1" size={24} color={COLORS.greyDark} />
             </View>
             <View>
-              <Text style={styles.passwordTitle}>{item.title}</Text>
-              <Text style={styles.passwordIdentifier}>{item.identifier}</Text>
+              <Text style={styles.passwordTitle}>{item.name}</Text>
+              <Text style={styles.passwordIdentifier}>
+                {item.userIdentifier}
+              </Text>
             </View>
             <TouchableOpacity
               onPress={() => copyToClipboard(item.password)}
@@ -84,6 +104,16 @@ const Search = () => {
 export default Search;
 
 const styles = StyleSheet.create({
+  searchInputContainer: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 8,
+    backgroundColor: COLORS.greyLight,
+    minHeight: 45,
+    marginBottom: 24,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -117,42 +147,3 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
 });
-
-const DATA = [
-  {
-    title: 'Apple',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'apple.com',
-  },
-  {
-    title: 'Adobe',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'adobe.com',
-  },
-  {
-    title: 'Netflix',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'netflix.com',
-  },
-  {
-    title: 'Snapchat',
-    identifier: 'snapfaiza@gmail.com',
-    password: 'test1234',
-    link: 'snapchat.com',
-  },
-  {
-    title: 'Spotify',
-    identifier: 'faizaspotify@gmail.com',
-    password: 'test1234',
-    link: 'spotify.com',
-  },
-  {
-    title: 'Slack',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'slack.com',
-  },
-];

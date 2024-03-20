@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Screen} from '../components';
 import {COLORS} from '../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -9,8 +9,30 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ROUTES} from '../navs/routes';
 import {useNavigate} from '../hooks';
 import CircularProgress from '../components/CircularProgress';
+import useRecords from '../hooks/useRecords';
+import LoaderView from '../components/LoaderView';
+import {Record} from '../types';
+import {useAppContext} from '../contexts/AppProvider';
+import {useNavigation} from '@react-navigation/native';
 
 const Analysis = () => {
+  const {records} = useAppContext();
+  const {isLoading, refetch} = useRecords();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      refetch();
+    });
+
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
+
+  if (isLoading && !records) {
+    return <LoaderView />;
+  }
+
   return (
     <Screen>
       <FlatList
@@ -58,7 +80,7 @@ const Analysis = () => {
         ListFooterComponent={() => <View style={styles.itemSeparator} />}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
-        data={DATA}
+        data={records}
         renderItem={({item}) => <Analytic item={item} />}
       />
     </Screen>
@@ -165,16 +187,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Analytic = ({
-  item,
-}: {
-  item: {
-    title: string;
-    identifier: string;
-    password: string;
-    link: string;
-  };
-}) => {
+const Analytic = ({item}: {item: Record}) => {
   const {navigate} = useNavigate();
   const percentage = Math.floor(Math.random() * 100);
 
@@ -204,8 +217,8 @@ const Analytic = ({
             flex: 1,
           }}>
           <View style={{flex: 1, gap: 4}}>
-            <Text style={styles.rowTitle}>{item.title}</Text>
-            <Text style={styles.rowIdentifier}>{item.identifier}</Text>
+            <Text style={styles.rowTitle}>{item.name}</Text>
+            <Text style={styles.rowIdentifier}>{item.userIdentifier}</Text>
           </View>
           <MaterialCommunityIcons
             name="chevron-right"
@@ -237,42 +250,3 @@ const Analytic = ({
     </TouchableOpacity>
   );
 };
-
-const DATA = [
-  {
-    title: 'Apple',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'apple.com',
-  },
-  {
-    title: 'Adobe',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'adobe.com',
-  },
-  {
-    title: 'Netflix',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'netflix.com',
-  },
-  {
-    title: 'Snapchat',
-    identifier: 'snapfaiza@gmail.com',
-    password: 'test1234',
-    link: 'snapchat.com',
-  },
-  {
-    title: 'Spotify',
-    identifier: 'faizaspotify@gmail.com',
-    password: 'test1234',
-    link: 'spotify.com',
-  },
-  {
-    title: 'Slack',
-    identifier: 'faizaolagunju@gmail.com',
-    password: 'test1234',
-    link: 'slack.com',
-  },
-];

@@ -6,12 +6,7 @@ import React, {
   useContext,
   useState,
 } from 'react';
-
-type User = {
-  fullName: string;
-  securityQuestion: string;
-  phoneNumber: string;
-};
+import {User} from '../types';
 
 type Context = {
   user: User | null;

@@ -16,16 +16,20 @@ import {useRoute} from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {showToast} from '../utils';
 import {ROUTES} from '../navs/routes';
+import {Record} from '../types';
+import {axiosInstance} from '../libs/axiosInstance';
+import {useAuthContext} from '../contexts/AuthProvider';
 
 type Route = {
   params: {
-    record: {title: string; identifier: string; password: string; link: string};
+    record: Record;
   };
 };
 
 const RecordDetails = () => {
   const navigation = useNavigate();
   const {params} = useRoute() as Route;
+  const {user} = useAuthContext();
 
   if (!params.record) {
     navigation.goBack();
@@ -36,12 +40,29 @@ const RecordDetails = () => {
     showToast('Copied!');
   };
 
-  const handleOpenUrl = async () => {
-    const isLinkSupported = await Linking.canOpenURL(params.record.link);
+  const handleOpenUrl = async (link: string) => {
+    const isLinkSupported = await Linking.canOpenURL(link);
     if (isLinkSupported) {
-      await Linking.openURL(params.record.link);
+      await Linking.openURL(link);
     } else {
       showToast('Cannot open this URL', 'error');
+    }
+  };
+
+  const deleteRecord = async () => {
+    try {
+      await axiosInstance.delete(
+        `/records/${params.record.id}?userId=${user?.id || ''}`,
+      );
+      showToast('Record deleted successfully');
+      navigation.goBack();
+    } catch (ex: any) {
+      const errorMsg =
+        ex?.message === 'Network Error'
+          ? ex?.message
+          : ex?.response?.data?.error || 'Oops, something went wrong';
+      showToast(errorMsg, 'error');
+      console.log(ex.response.data);
     }
   };
 
@@ -54,7 +75,7 @@ const RecordDetails = () => {
             <Text style={styles.backText}>back</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={deleteRecord}>
           <Ionicons name="trash-outline" size={24} color={COLORS.danger} />
         </TouchableOpacity>
       </View>
@@ -66,43 +87,33 @@ const RecordDetails = () => {
               <AntDesign name="android1" size={42} color={COLORS.white} />
             </View>
             <View>
-              <Text style={styles.title}>{params.record.title}</Text>
-              <Text style={styles.identifier}>{params.record.identifier}</Text>
+              <Text style={styles.title}>{params.record.name}</Text>
+              <Text style={styles.identifier}>
+                {params.record.userIdentifier}
+              </Text>
             </View>
           </View>
 
           <View style={styles.content}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingBottom: 14,
-                borderBottomWidth: 1,
-                borderColor: COLORS.grey2,
-                marginBottom: 16,
-              }}>
+            <View style={styles.detailsHeader}>
               <Text style={{fontSize: 20}}>Details & settings</Text>
             </View>
 
             <View style={{gap: 24}}>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={{flex: 0.3, fontSize: 16}}>Link</Text>
-                <TouchableOpacity style={{flex: 0.7}} onPress={handleOpenUrl}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: COLORS.blue,
-                      textDecorationLine: 'underline',
-                    }}>
-                    {params.record.link}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              {params.record.link && (
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={{flex: 0.3, fontSize: 16}}>Link</Text>
+                  <TouchableOpacity
+                    style={{flex: 0.7}}
+                    onPress={() => handleOpenUrl(params.record.link || '')}>
+                    <Text style={styles.link}>{params.record.link}</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
               <View style={{flexDirection: 'row'}}>
                 <Text style={{flex: 0.3, fontSize: 16}}>Identifier</Text>
                 <Text style={{flex: 0.7, fontSize: 16, opacity: 0.4}}>
-                  {params.record.identifier}
+                  {params.record.userIdentifier}
                 </Text>
               </View>
               <View style={{flexDirection: 'row'}}>
@@ -113,13 +124,7 @@ const RecordDetails = () => {
               </View>
             </View>
 
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 16,
-                marginTop: 40,
-              }}>
+            <View style={styles.btnsContainer}>
               <AppButton
                 handleClick={() => copyToClipboard(params.record.password)}
                 text="Copy password"
@@ -171,6 +176,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 6,
   },
+  link: {
+    fontSize: 16,
+    color: COLORS.blue,
+    textDecorationLine: 'underline',
+  },
   iconContainer: {
     width: 80,
     height: 80,
@@ -185,7 +195,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 16,
   },
+  detailsHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: 14,
+    borderBottomWidth: 1,
+    borderColor: COLORS.grey2,
+    marginBottom: 16,
+  },
   content: {
+    marginTop: 40,
+  },
+  btnsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
     marginTop: 40,
   },
 });
