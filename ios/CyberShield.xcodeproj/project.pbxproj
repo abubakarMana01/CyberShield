@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CyberShieldTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CyberShieldTests.m */; };
+		07DB1F405141812CB5C1A2F1 /* libPods-CyberShield-CyberShieldTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 516D1FD24917466F40A170B5 /* libPods-CyberShield-CyberShieldTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1F4064A5F33A55AE677D8BCA /* libPods-CyberShield-CyberShieldTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BA5A3EBBBD051AE60E1CF3 /* libPods-CyberShield-CyberShieldTests.a */; };
-		2973D12B7DB94FBF655AFE3C /* libPods-CyberShield.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73BF4F23355BEF590A2F380C /* libPods-CyberShield.a */; };
+		26A5116BDA9B57F271A2E088 /* libPods-CyberShield.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86567BFD7F788DD02DEE3564 /* libPods-CyberShield.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -30,20 +30,20 @@
 		00E356EE1AD99517003FC87E /* CyberShieldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CyberShieldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CyberShieldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyberShieldTests.m; sourceTree = "<group>"; };
+		0627995960AC91FCC817DEA0 /* Pods-CyberShield.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield.debug.xcconfig"; path = "Target Support Files/Pods-CyberShield/Pods-CyberShield.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* CyberShield.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CyberShield.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CyberShield/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = CyberShield/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CyberShield/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CyberShield/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CyberShield/main.m; sourceTree = "<group>"; };
-		73BF4F23355BEF590A2F380C /* libPods-CyberShield.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CyberShield.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D27FBB2D3F9C0984665418E /* Pods-CyberShield-CyberShieldTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield-CyberShieldTests.debug.xcconfig"; path = "Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests.debug.xcconfig"; sourceTree = "<group>"; };
+		516D1FD24917466F40A170B5 /* libPods-CyberShield-CyberShieldTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CyberShield-CyberShieldTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4625635DC719B5B9A3390 /* Pods-CyberShield-CyberShieldTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield-CyberShieldTests.release.xcconfig"; path = "Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CyberShield/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8F55F1DCEA18F3E54CAEF57B /* Pods-CyberShield.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield.debug.xcconfig"; path = "Target Support Files/Pods-CyberShield/Pods-CyberShield.debug.xcconfig"; sourceTree = "<group>"; };
-		8F624975D39F0AD14C438E62 /* Pods-CyberShield.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield.release.xcconfig"; path = "Target Support Files/Pods-CyberShield/Pods-CyberShield.release.xcconfig"; sourceTree = "<group>"; };
-		98BA5A3EBBBD051AE60E1CF3 /* libPods-CyberShield-CyberShieldTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CyberShield-CyberShieldTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA22DD62BDC55B828CF2769A /* Pods-CyberShield-CyberShieldTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield-CyberShieldTests.debug.xcconfig"; path = "Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests.debug.xcconfig"; sourceTree = "<group>"; };
-		DDC2760F5BF468AA2DFEE139 /* Pods-CyberShield-CyberShieldTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield-CyberShieldTests.release.xcconfig"; path = "Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests.release.xcconfig"; sourceTree = "<group>"; };
+		86567BFD7F788DD02DEE3564 /* libPods-CyberShield.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CyberShield.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EE543E2C55ABE76A0463E695 /* Pods-CyberShield.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CyberShield.release.xcconfig"; path = "Target Support Files/Pods-CyberShield/Pods-CyberShield.release.xcconfig"; sourceTree = "<group>"; };
 		EF9A08C02BA570D800FF1765 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		EF9A08C12BA570D800FF1765 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		EF9A08C22BA570D800FF1765 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F4064A5F33A55AE677D8BCA /* libPods-CyberShield-CyberShieldTests.a in Frameworks */,
+				07DB1F405141812CB5C1A2F1 /* libPods-CyberShield-CyberShieldTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2973D12B7DB94FBF655AFE3C /* libPods-CyberShield.a in Frameworks */,
+				26A5116BDA9B57F271A2E088 /* libPods-CyberShield.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				73BF4F23355BEF590A2F380C /* libPods-CyberShield.a */,
-				98BA5A3EBBBD051AE60E1CF3 /* libPods-CyberShield-CyberShieldTests.a */,
+				86567BFD7F788DD02DEE3564 /* libPods-CyberShield.a */,
+				516D1FD24917466F40A170B5 /* libPods-CyberShield-CyberShieldTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -160,10 +160,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8F55F1DCEA18F3E54CAEF57B /* Pods-CyberShield.debug.xcconfig */,
-				8F624975D39F0AD14C438E62 /* Pods-CyberShield.release.xcconfig */,
-				DA22DD62BDC55B828CF2769A /* Pods-CyberShield-CyberShieldTests.debug.xcconfig */,
-				DDC2760F5BF468AA2DFEE139 /* Pods-CyberShield-CyberShieldTests.release.xcconfig */,
+				0627995960AC91FCC817DEA0 /* Pods-CyberShield.debug.xcconfig */,
+				EE543E2C55ABE76A0463E695 /* Pods-CyberShield.release.xcconfig */,
+				2D27FBB2D3F9C0984665418E /* Pods-CyberShield-CyberShieldTests.debug.xcconfig */,
+				6CE4625635DC719B5B9A3390 /* Pods-CyberShield-CyberShieldTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -201,12 +201,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CyberShieldTests" */;
 			buildPhases = (
-				0B79C364929595A3D1C37DB5 /* [CP] Check Pods Manifest.lock */,
+				1594C3EA58805EBEC6B343F6 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				2405004C1E824DEA44BCAD94 /* [CP] Embed Pods Frameworks */,
-				FC0C609AE48D580A7885435C /* [CP] Copy Pods Resources */,
+				D3C7C8D1BCB0E6A0B5216F75 /* [CP] Embed Pods Frameworks */,
+				5172BC9531FEC818E0EAF47F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -222,13 +222,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CyberShield" */;
 			buildPhases = (
-				2FA2F181DEBB2F8A412E44A5 /* [CP] Check Pods Manifest.lock */,
+				EC552BFB4564D0CFF66EB8EB /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				84584E9B997145604E5DC15F /* [CP] Embed Pods Frameworks */,
-				C8101A1E11F937529FBA61CD /* [CP] Copy Pods Resources */,
+				3A90C800BC0B63B213DBC54B /* [CP] Embed Pods Frameworks */,
+				714C09EA908B0D9CC558B83E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -312,7 +312,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		0B79C364929595A3D1C37DB5 /* [CP] Check Pods Manifest.lock */ = {
+		1594C3EA58805EBEC6B343F6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -334,7 +334,58 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2405004C1E824DEA44BCAD94 /* [CP] Embed Pods Frameworks */ = {
+		3A90C800BC0B63B213DBC54B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5172BC9531FEC818E0EAF47F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		714C09EA908B0D9CC558B83E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3C7C8D1BCB0E6A0B5216F75 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -351,7 +402,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2FA2F181DEBB2F8A412E44A5 /* [CP] Check Pods Manifest.lock */ = {
+		EC552BFB4564D0CFF66EB8EB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -371,57 +422,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		84584E9B997145604E5DC15F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C8101A1E11F937529FBA61CD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CyberShield/Pods-CyberShield-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FC0C609AE48D580A7885435C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CyberShield-CyberShieldTests/Pods-CyberShield-CyberShieldTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -457,7 +457,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA22DD62BDC55B828CF2769A /* Pods-CyberShield-CyberShieldTests.debug.xcconfig */;
+			baseConfigurationReference = 2D27FBB2D3F9C0984665418E /* Pods-CyberShield-CyberShieldTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -484,7 +484,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDC2760F5BF468AA2DFEE139 /* Pods-CyberShield-CyberShieldTests.release.xcconfig */;
+			baseConfigurationReference = 6CE4625635DC719B5B9A3390 /* Pods-CyberShield-CyberShieldTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -508,7 +508,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F55F1DCEA18F3E54CAEF57B /* Pods-CyberShield.debug.xcconfig */;
+			baseConfigurationReference = 0627995960AC91FCC817DEA0 /* Pods-CyberShield.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -537,7 +537,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F624975D39F0AD14C438E62 /* Pods-CyberShield.release.xcconfig */;
+			baseConfigurationReference = EE543E2C55ABE76A0463E695 /* Pods-CyberShield.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

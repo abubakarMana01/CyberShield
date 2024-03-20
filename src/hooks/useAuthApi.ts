@@ -11,7 +11,7 @@ type AuthPath = 'register' | 'login' | 'validate-security-question';
 const useAuthApi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {navigate} = useNavigate();
-  const {setUser, setIsAuthenticated} = useAuthContext();
+  const {setUser} = useAuthContext();
 
   const authHandler = async (path: AuthPath, formData: any) => {
     setIsLoading(true);
@@ -29,9 +29,9 @@ const useAuthApi = () => {
         showToast('Correct');
 
         // TODO? Remove when testing on real device
-        setIsAuthenticated(true);
+        // setIsAuthenticated(true);
 
-        // navigate(ROUTES.BIOMETRICS);
+        navigate(ROUTES.BIOMETRICS);
       }
     } catch (ex: any) {
       const errorMsg =
