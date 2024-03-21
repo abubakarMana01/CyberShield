@@ -11,6 +11,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Slider} from '@miblanchard/react-native-slider';
 import {generatePassword} from '../utils/generatePassword';
+import {
+  calculatePasswordStrength,
+  STRENGTH_LEVEL_MAX,
+} from '../utils/passwordStrength';
 
 interface Props {
   triggerRegenerate?: () => void;
@@ -31,6 +35,18 @@ const PasswordGenerator = ({
   const [useNumbers, setUseNumbers] = useState(true);
   const [useLowerCase, setUseLowerCase] = useState(true);
   const [useUpperCase, setUseUpperCase] = useState(true);
+
+  const strengthPercentage = calculatePasswordStrength(password);
+  const getStatus = (): 'Risk' | 'Weak' | 'Safe' => {
+    if (strengthPercentage < STRENGTH_LEVEL_MAX.risk) {
+      return 'Risk';
+    } else if (strengthPercentage < STRENGTH_LEVEL_MAX.weak) {
+      return 'Weak';
+    } else {
+      return 'Safe';
+    }
+  };
+  const status = getStatus();
 
   useEffect(() => {
     setPassword(
@@ -56,7 +72,12 @@ const PasswordGenerator = ({
     <View>
       <View style={styles.passwordFieldWrapper}>
         <View style={styles.passwordFieldContainer}>
-          <TextInput value={password} style={styles.textInput} />
+          <TextInput
+            value={password}
+            style={styles.textInput}
+            onChangeText={setPassword}
+            autoCapitalize="none"
+          />
           <TouchableOpacity
             onPress={() => setRegenerateCount(prev => prev + 1)}>
             <Ionicons name="sync" size={28} color={COLORS.black} />
@@ -66,9 +87,14 @@ const PasswordGenerator = ({
           <View
             // eslint-disable-next-line react-native/no-inline-styles
             style={{
-              width: '70%',
+              width: `${strengthPercentage}%`,
               height: '100%',
-              backgroundColor: COLORS.warning,
+              backgroundColor:
+                status === 'Risk'
+                  ? COLORS.danger
+                  : status === 'Weak'
+                  ? COLORS.warning
+                  : COLORS.success,
             }}
           />
         </View>

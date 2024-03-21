@@ -18,6 +18,7 @@ const BottomTabNavigator = () => {
     <BottomTabs.Navigator
       screenOptions={{
         headerShown: true,
+        headerTitleAlign: 'center',
         headerTitleStyle: {
           fontWeight: '500',
         },

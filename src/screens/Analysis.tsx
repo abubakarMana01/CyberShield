@@ -14,11 +14,36 @@ import LoaderView from '../components/LoaderView';
 import {Record} from '../types';
 import {useAppContext} from '../contexts/AppProvider';
 import {useNavigation} from '@react-navigation/native';
+import {
+  calculatePasswordStrength,
+  STRENGTH_LEVEL_MAX,
+} from '../utils/passwordStrength';
 
 const Analysis = () => {
   const {records} = useAppContext();
   const {isLoading, refetch} = useRecords();
   const navigation = useNavigation();
+
+  const weakPasswords = [];
+  const riskPasswords = [];
+  const strongPasswords = [];
+
+  records?.forEach(record => {
+    const strengthPercentage = calculatePasswordStrength(record.password);
+
+    if (strengthPercentage < STRENGTH_LEVEL_MAX.risk) {
+      riskPasswords.push(record.password);
+    } else if (strengthPercentage < STRENGTH_LEVEL_MAX.weak) {
+      weakPasswords.push(record.password);
+    } else {
+      strongPasswords.push(record.password);
+    }
+  });
+
+  const securityPercentage =
+    (strongPasswords.length /
+      (strongPasswords.length + weakPasswords.length + riskPasswords.length)) *
+    100;
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
@@ -52,19 +77,21 @@ const Analysis = () => {
                 <CircularProgress percent={64} />
               </View>
             </View>
-            <Text style={styles.securityPercentage}>64% secured</Text>
+            <Text style={styles.securityPercentage}>
+              {securityPercentage}% secured
+            </Text>
 
             <View style={styles.statsRow}>
               <View style={styles.stat}>
-                <Text style={styles.statNumber}>40</Text>
+                <Text style={styles.statNumber}>{strongPasswords.length}</Text>
                 <Text style={styles.statTitle}>Safe</Text>
               </View>
               <View style={styles.stat}>
-                <Text style={styles.statNumber}>15</Text>
+                <Text style={styles.statNumber}>{weakPasswords.length}</Text>
                 <Text style={styles.statTitle}>Weak</Text>
               </View>
               <View style={styles.stat}>
-                <Text style={styles.statNumber}>6</Text>
+                <Text style={styles.statNumber}>{riskPasswords.length}</Text>
                 <Text style={styles.statTitle}>Risk</Text>
               </View>
             </View>
@@ -189,12 +216,12 @@ const styles = StyleSheet.create({
 
 const Analytic = ({item}: {item: Record}) => {
   const {navigate} = useNavigate();
-  const percentage = Math.floor(Math.random() * 100);
+  const percentage = calculatePasswordStrength(item.password);
 
   const getStatus = (): 'Risk' | 'Weak' | 'Safe' => {
-    if (percentage < 30) {
+    if (percentage < STRENGTH_LEVEL_MAX.risk) {
       return 'Risk';
-    } else if (percentage < 80) {
+    } else if (percentage < STRENGTH_LEVEL_MAX.weak) {
       return 'Weak';
     } else {
       return 'Safe';
