@@ -71,10 +71,10 @@ const Analysis = () => {
                       styles.securityPercentage,
                       {top: -3, fontWeight: '500'},
                     ]}>
-                    64%
+                    {securityPercentage}%
                   </Text>
                 </View>
-                <CircularProgress percent={64} />
+                <CircularProgress percent={securityPercentage} />
               </View>
             </View>
             <Text style={styles.securityPercentage}>

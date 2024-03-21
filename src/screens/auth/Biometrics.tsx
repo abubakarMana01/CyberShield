@@ -13,9 +13,10 @@ const Biometrics = () => {
   const {setIsAuthenticated, user} = useAuthContext();
 
   const authenticate = () => {
-    TouchID.authenticate('to demo this react-native component')
+    TouchID.authenticate('Verify biometrics')
       .then((success: any) => {
         console.log('Success', success);
+        showToast('Sucess. You can proceed');
         setIsSuccessful(true);
       })
       .catch((error: any) => {
